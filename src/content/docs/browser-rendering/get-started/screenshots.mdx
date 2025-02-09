@@ -41,7 +41,13 @@ In your `browser-worker` directory, install Cloudflare’s [fork of Puppeteer](/
 npm install @cloudflare/puppeteer --save-dev
 ```
 
-## 3. Create a KV namespace
+## 3. Enable Node.js compatibility
+
+[Node.js compatibility](/workers/runtime-apis/nodejs/) is required for Puppeteer, and needs to be configured for your Workers project.
+
+<Render file="nodejs_compat" product="workers" />
+
+## 4. Create a KV namespace
 
 Browser Rendering can be used with other developer products. You might need a [relational database](/d1/), an [R2 bucket](/r2/) to archive your crawled pages and assets, a [Durable Object](/durable-objects/) to keep your browser instance alive and share it with multiple requests, or [Queues](/queues/) to handle your jobs asynchronous.
 
@@ -56,7 +62,7 @@ npx wrangler kv:namespace create BROWSER_KV_DEMO --preview
 
 Take note of the IDs for the next step.
 
-## 4. Configure the `wrangler.toml / wrangler.json` file
+## 5. Configure the `wrangler.toml / wrangler.json` file
 
 Configure your `browser-worker` project's [`wrangler.toml / wrangler.json` file](/workers/wrangler/configuration/) by adding a browser [binding](/workers/runtime-apis/bindings/) and a [Node.js compatibility flag](/workers/configuration/compatibility-flags/#nodejs-compatibility-flag). Bindings allow your Workers to interact with resources on the Cloudflare developer platform. Your browser `binding` name is set by you, this guide uses the name `MYBROWSER`. Browser bindings allow for communication between a Worker and a headless browser which allows you to do actions such as taking a screenshot, generating a PDF and more.
 
@@ -78,7 +84,7 @@ kv_namespaces = [
 
 </WranglerConfig>
 
-## 5. Code
+## 6. Code
 
 <Tabs> <TabItem label="JavaScript" icon="seti:javascript">
 Update `src/index.js` with your Worker code:
@@ -165,7 +171,7 @@ If your Worker is running in production, it will store the screenshot to the pro
 
 If the same `"url"` is requested again, it will use the cached version in KV instead, unless it expired.
 
-## 6. Test
+## 7. Test
 
 Run [`npx wrangler dev --remote`](/workers/wrangler/commands/#dev) to test your Worker remotely before deploying to Cloudflare's global network. Local mode support does not exist for Browser Rendering so `--remote` is required.
 
@@ -173,7 +179,7 @@ To test taking your first screenshot, go to the following URL:
 
 `<LOCAL_HOST_URL>/?url=https://example.com`
 
-## 7. Deploy
+## 8. Deploy
 
 Run `npx wrangler deploy` to deploy your Worker to the Cloudflare global network.
 
