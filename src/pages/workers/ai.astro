@@ -2,7 +2,7 @@
 import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
 import { Image } from "astro:assets";
 
-import { Badge } from "@astrojs/starlight/components";
+import { Aside, Badge } from "@astrojs/starlight/components";
 
 import CursorDark from "~/assets/images/workers/ai/cursor-dark.png";
 import CursorLight from "~/assets/images/workers/ai/cursor-light.png";
@@ -40,11 +40,11 @@ import CursorLight from "~/assets/images/workers/ai/cursor-light.png";
 				>, and <a href="/ai-gateway/">AI Gateway</a>. Cursor is here to help
 				answer your Cloudflare questions, so ask away!
 			</p>
-			<aside role="note" data-type="warning">
+			<Aside type="caution">
 				Cursor is an experimental AI preview, meaning that the answers provided
 				are often incorrect, incomplete, or lacking in context. Be sure to
 				double-check what Cursor recommends using the linked sources provided.
-			</aside>
+			</Aside>
 		</div>
 	</section>
 
