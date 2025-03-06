@@ -68,11 +68,12 @@ Populate your database with the table from the [D1 get started](/d1/get-started/
     CREATE TABLE IF NOT EXISTS Customers (CustomerId INTEGER PRIMARY KEY, CompanyName TEXT, ContactName TEXT);
     INSERT INTO Customers (CustomerID, CompanyName, ContactName) VALUES (1, 'Alfreds Futterkiste', 'Maria Anders'), (4, 'Around the Horn', 'Thomas Hardy'), (11, 'Bs Beverages', 'Victoria Ashworth'), (13, 'Bs Beverages', 'Random Name');
     ```
+
 2. Initialize your database to run remotely.
 
-  ```sh
-  npx wrangler d1 execute <DATABASE_NAME> --remote --file=./schema.sql
-	```
+    ```sh
+    npx wrangler d1 execute <DATABASE_NAME> --remote --file=./schema.sql
+    ```
 </Steps>
 
 ## 5. Write a Worker file which queries the table
@@ -81,26 +82,26 @@ Write a Worker file which queries the table and outputs both the results with th
 
 ```js
 export default {
-	async fetch(request, env) {
-	  const { pathname } = new URL(request.url);
-	  const companyName1 = `Bs Beverages`;
-	  const stmt = env.DB.prepare(`SELECT * FROM Customers WHERE CompanyName = ?`);
-	  const session = env.DB.withSession("first-unconstrained");
+  async fetch(request, env) {
+    const { pathname } = new URL(request.url);
+    const companyName1 = `Bs Beverages`;
+    const stmt = env.DB.prepare(`SELECT * FROM Customers WHERE CompanyName = ?`);
+    const session = env.DB.withSession("first-unconstrained");
 
-	  if (pathname === `/run`) {
-		const tsStart1 = Date.now();
-		const { results, meta } = await stmt.bind(companyName1).run();
-		const d1Duration1 = Date.now() - tsStart1;
-		return Response.json({ results, meta, d1Duration1 });
+    if (pathname === `/run`) {
+    const tsStart1 = Date.now();
+    const { results, meta } = await stmt.bind(companyName1).run();
+    const d1Duration1 = Date.now() - tsStart1;
+    return Response.json({ results, meta, d1Duration1 });
 
-	  } else if (pathname === `/withsession`) {
-		const tsStart2 = Date.now();
-		const { results, meta } = await session.prepare(`SELECT * FROM Customers WHERE CompanyName = ?`).bind(companyName1).run();
-		const d1Duration2 = Date.now() - tsStart2;
-		return Response.json({ results, meta, d1Duration2 });
-	  }
-	  return new Response(
-		`Welcome to the D1 read replication demo!
+    } else if (pathname === `/withsession`) {
+    const tsStart2 = Date.now();
+    const { results, meta } = await session.prepare(`SELECT * FROM Customers WHERE CompanyName = ?`).bind(companyName1).run();
+    const d1Duration2 = Date.now() - tsStart2;
+    return Response.json({ results, meta, d1Duration2 });
+    }
+    return new Response(
+    `Welcome to the D1 read replication demo!
 
   Add one of the following slugs below to see the effects of using D1 read replication.
 
@@ -108,9 +109,9 @@ export default {
 
   \n/withsession - Queries the table using read replication (using "first-unconstrained")
 
-	\nUse the two options to compare the difference in query latency.`
-	  );
-	}
+  \nUse the two options to compare the difference in query latency.`
+    );
+  }
   };
 ```
 
