@@ -29,7 +29,7 @@ Post-delivery deployment is time-efficient, because it does not involve MX chang
 :::note
 When you choose post-delivery deployment:
 - The threat is removed **after** the message has been delivered to the inbox.
-- It requires API scopes, or journaling rule configuration.
+- It requires API scopes, or BCC/journaling rule configuration.
 - Auto-move is only available in BCC/Journaling if you associate an integration.
 :::
 
@@ -41,7 +41,7 @@ When you choose pre-delivery deployment, Cloudflare scans emails **before** they
 
 ### Why you should consider pre-delivery deployment
 
-Pre-delivery deployment provides you with the highest level of protection. It enforces [bannering](/cloudflare-one/email-security/detection-settings/configure-text-add-ons/) or link rewrite at delivery.
+Pre-delivery deployment provides you with the highest level of protection. It enforces [text add-ons](/cloudflare-one/email-security/detection-settings/configure-text-add-ons/) or link rewrite at delivery.
 
 Pre-delivery blocks threats in transit, and it adds banners or texts before the user views the email.
 
@@ -49,7 +49,7 @@ Pre-delivery blocks threats in transit, and it adds banners or texts before the 
 When you choose pre-delivery deployment:
 - You must edit MX records or create a connector.
 - You can enable auto-move events only once you associate an integration.
-- Cloudflare [egress IPs](/cloudflare-one/email-security/setup/pre-delivery-deployment/egress-ips/) are allowed on downstream servers.
+- Cloudflare [egress IPs](/cloudflare-one/email-security/setup/pre-delivery-deployment/egress-ips/) are allowed on downstream mail servers.
 :::
 
 ## Dispositions
@@ -111,4 +111,4 @@ A correct use of reclassifications ensures that Email Security delivers a strong
 | Send a test email and verify it appears in **Monitoring** > [**Email activity**](/cloudflare-one/email-security/email-monitoring/#email-activity) with expected disposition        | Required      | Required     |
 
 [^1]: Alternatively, you can create a service account and add BCC rules.
-[^2]: Still used for directory/auto‑move insight if desired as well as authorizing free API CASB
+[^2]: Still used for directory/auto‑move insight if desired as well as authorizing free API CASB.
