@@ -1,0 +1,186 @@
+---
+title: Migrate to Email Security
+pcx_content_type: how-to
+sidebar:
+  order: 9
+---
+
+This page aims at showing you how to perform Area 1 actions in [Zero Trust Email Security](/cloudflare-one/email-security/).
+
+import { Tabs, TabItem } from '~/components';
+
+## Invite users
+
+<Tabs>
+
+  <TabItem label="Area 1">
+    1. Go to **Settings** (gear icon) > **Users and Actions**
+  </TabItem>
+  <TabItem label="Email Security">
+    1. Go to **Manage Account**
+    2. Select **Members** > **Invite**. Refer to [Add account members](/fundamentals/setup/manage-members/manage/#add-account-members) for detailed instructions.
+    3. Assign [roles](/cloudflare-one/roles-permissions/#email-security-roles)
+  </TabItem>
+
+</Tabs>
+
+## Create webhooks
+
+<Tabs>
+
+  <TabItem label="Area 1">
+    Refer to [Create an alert webhook](/email-security/email-configuration/domains-and-routing/alert-webhooks/#create-an-alert-webhook)
+  </TabItem>
+  <TabItem label="Email Security">
+   Refer to [Enable Email Security logs](/cloudflare-one/insights/logs/enable-logs/).
+  </TabItem>
+
+</Tabs>
+
+## Set up system alerts
+
+<Tabs>
+
+  <TabItem label="Area 1">
+    Refer to [Statistics overview](/email-security/reporting/statistics-overview/)
+  </TabItem>
+  <TabItem label="Email Security">
+   Refer to:
+    - [Cloudflare System Status](https://www.cloudflarestatus.com/)
+    - [Cloudflare Status API](https://www.cloudflarestatus.com/api)
+    - [Configure Cloudflare Notifications](https://developers.cloudflare.com/notifications/get-started/)
+  </TabItem>
+
+</Tabs>
+
+## Contact support
+
+<Tabs>
+
+  <TabItem label="Area 1">
+    Send an email to:
+    - support@area1security.com
+    - phishguard@area1security.com (PhishGuard customers only)
+  </TabItem>
+  <TabItem label="Email Security">
+   Refer to:
+    - [Cloudflare Help Center](https://www.support.cloudflare.com/s/?language=en_US)
+    - [Add participants to open support tickets](/support/contacting-cloudflare-support/#add-participants-to-open-support-tickets)
+    - [Raise a ticket](/support/contacting-cloudflare-support/#getting-help-with-an-issue) by entering the correct answers to the following questions:
+        - What type of question do you have?: **Technical - Other Products**
+        - In what area can we help you?: **Email Security**
+  </TabItem>
+
+</Tabs>
+
+## Search emails
+
+<Tabs>
+
+  <TabItem label="Area 1">
+    - Select **Search**:
+        1. Fielded search
+        2. Freeform search
+    - Report false negative/false positive
+  </TabItem>
+  <TabItem label="Email Security">
+   - Select **Email Security** > **Investigation**:
+    - Advanced screen
+    - Regular screen
+    - Popular screen
+   - Reclassify messages
+  </TabItem>
+
+</Tabs>
+
+## Check metrics
+
+<Tabs>
+
+  <TabItem label="Area 1">
+    - Select **Home**
+    - **Retractions**
+  </TabItem>
+  <TabItem label="Email Security">
+   - Select **Email Security** > **Monitoring** > **Auto-moves**
+  </TabItem>
+
+</Tabs>
+
+## Create policies
+
+<Tabs>
+
+  <TabItem label="Area 1">
+    - [Allow block/list](/email-security/email-configuration/lists/)
+    - [Text add-ons](/email-security/email-configuration/email-policies/text-addons/)
+    - [Link actions](/email-security/email-configuration/email-policies/link-actions/)
+    - [Added detections](/email-configuration/enhanced-detections/added-detections/)
+  </TabItem>
+  <TabItem label="Email Security">
+    - [Allow policies](/email-security/detection-settings/allow-policies/)
+    - [Blocked senders](/email-security/detection-settings/blocked-senders/)
+    - [Trusted domains](/email-security/detection-settings/trusted-domains/)
+    - [Text add-ons](/cloudflare-one/email-security/detection-settings/configure-link-actions/)
+    - [Link actions](/cloudflare-one/email-security/detection-settings/configure-text-add-ons/)
+    - [Additional detections](/cloudflare-one/email-security/detection-settings/additional-detections/)
+  </TabItem>
+
+</Tabs>
+
+## Reclassifications
+
+<Tabs>
+
+  <TabItem label="Area 1">
+    - [Report false positive](/email-security/email-configuration/phish-submissions/#false-positives)
+    - [Report false negative](/email-security/email-configuration/phish-submissions/#false-negatives)
+    - Escalate user submissions: Not Applicable
+    - [Team submission addresses](/email-security/email-configuration/phish-submissions/#how-to-submit-phish)
+    - [User submission addresses](/email-security/email-configuration/phish-submissions/#how-to-submit-phish)
+  </TabItem>
+  <TabItem label="Email Security">
+    - [Reclassify](/email-security/phish-submissions/#reclassify-an-email)
+    - [Escalate user submissions](/cloudflare-one/email-security/email-monitoring/search-email/#user-submissions)
+    - [Team submission addresses](/cloudflare-one/email-security/phish-submissions/#submission-addresses)
+    - [User submission addresses](/cloudflare-one/email-security/phish-submissions/#submission-addresses)
+
+  </TabItem>
+
+</Tabs>
+
+## Impersonation registry
+
+
+<Tabs>
+
+  <TabItem label="Area 1">
+
+    [Business Email Compromise (BEC) list](/email-security/email-configuration/enhanced-detections/business-email-compromise/)
+
+  </TabItem>
+  <TabItem label="Email Security">
+    
+    [Impersonation registry](/email-security/detection-settings/impersonation-registry/)
+
+  </TabItem>
+
+</Tabs>
+
+
+## Synchronize directories
+
+<Tabs>
+
+  <TabItem label="Area 1">
+
+    [Integrate a directory](/email-security/email-configuration/enhanced-detections/business-email-compromise/#integrating-a-directory)
+
+  </TabItem>
+  <TabItem label="Email Security">
+    
+    [Directories](/email-security/directories/)
+
+  </TabItem>
+
+</Tabs>
