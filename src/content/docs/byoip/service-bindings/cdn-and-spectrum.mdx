@@ -6,3 +6,14 @@ sidebar:
   label: CDN and Spectrum
 ---
 
+ With [service bindings](/byoip/service-bindings/), CDN[^1] customers using BYOIP can use the same prefix they have onboarded to selectively route traffic on a per-IP address basis to [Spectrum](/spectrum/)[^2], and vice-versa. This means:
+
+- You can upgrade individual IPs within a CDN prefix to a Spectrum IP. For example, if you have a CDN prefix 203.0.113.0/24, you can upgrade 203.0.113.1 to Spectrum.
+
+- You can upgrade individual IPs within a Spectrum prefix to a CDN IP. For example, if you have a Spectrum prefix 203.0.113.0/24, you can upgrade 203.0.113.1 to CDN.
+
+
+
+
+[^1]: Layer 7 HTTP-based
+[^2]: Layer 4 or Layer 7 HTTP with custom ports
