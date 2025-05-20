@@ -6,7 +6,7 @@ sidebar:
   label: CDN and Spectrum
 ---
 
-import { Render, APIRequest } from  "~/components";
+import { Render, APIRequest, Details, Example, TabItem, Tabs, GlossaryTooltip } from  "~/components";
 
  With [service bindings](/byoip/service-bindings/), CDN[^1] customers using BYOIP can take the same prefix they have onboarded to Cloudflare and use it to selectively route traffic on a per-IP address basis to [Spectrum](/spectrum/)[^2], or vice versa. This means:
 
@@ -65,7 +65,97 @@ method="GET"
 
 ### CDN
 
-Address maps and DNS records
+If you already use BYOIP with CDN, you might be able to skip this step. If you are using this guide to upgrade a few IPs from a Spectrum prefix to the CDN, consider the following:
+
+#### Address maps
+
+Use <GlossaryTooltip term="address map" link="/byoip/address-maps/">address maps</GlossaryTooltip> to specify which IPs should be used by Cloudflare in DNS responses when a record is <GlossaryTooltip term="proxy status" link="/dns/proxy-status/">proxied</GlossaryTooltip>.
+
+You can choose between two different scopes:
+
+- Account-level: uses the address map for all proxied DNS records across all of the zones within an account.
+- Zone-level: uses the address map for all proxied DNS records within a zone.
+
+:::note
+If you need to map only specific subdomains (and not all proxied DNS records) to specific IP addresses, you can use a [Subdomain setup](/dns/zone-setups/subdomain-setup/).
+:::
+
+<Tabs syncKey="dashPlusAPI">
+<TabItem label="Dashboard" no-code="true">
+
+1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/) and select your account.
+2. Go to **IP Addresses** > **Address Maps**.
+3. Select **Create an address map**.
+4. Choose the scope of the address map.
+5. Add the zones and IP addresses that you want to map.
+6. Name your address map.
+7. Review the information and select **Save and Deploy**.
+
+</TabItem>
+<TabItem label="API" no-code="true">
+
+Use the [Create Address Map](/api/resources/addressing/subresources/address_maps/methods/create/) endpoint.
+
+Make sure you have the correct Key/Token and permissions.
+
+</TabItem>
+</Tabs>
+
+#### DNS records
+
+While the DNS record proxy status and address map will determine how Cloudflare's authoritative DNS responds to requests for your hostnames, the IP addresses specified in `A`/`AAAA` records will determine [how Cloudflare reaches the configured origin](/fundamentals/concepts/how-cloudflare-works/#how-cloudflare-works-as-a-reverse-proxy).
+
+:::note
+As you create the necessary DNS records, [Total TLS](/ssl/edge-certificates/additional-options/total-tls/) can help making sure that you have SSL/TLS certificates in place for all your hostnames.
+:::
+
+<Tabs syncKey="dashPlusAPI">
+<TabItem label="Dashboard" no-code="true">
+
+To create a DNS record in the dashboard:
+
+1.  Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/login) and select an account and domain.
+2.  Go to **DNS** > **Records**.
+3.  Select **Add record**.
+4.  Choose an address (`A`/`AAAA`) [record type](/dns/manage-dns-records/reference/dns-record-types/).
+5.  Complete the required fields, setting the **Proxy status** to **proxied**.
+6.  Select **Save**.
+
+</TabItem>
+<TabItem label="API" no-code="true">
+
+To create records with the API, use a [POST request](/api/resources/dns/subresources/records/methods/create/). For field definitions, select a record type under the request body specification.
+
+</TabItem>
+</Tabs>
+
+<Details header="Example">
+
+| Type | Name  | IP address      | Proxy status | TTL    |
+| ---- | ----- | --------------- | ------------ | ------ |
+| `A`  | `www` | `203.0.113.150` | `Proxied`    | `Auto` |
+
+At this point, if an address map for a zone `example.com` specifies that Cloudflare should use `203.0.113.100` for proxied records and the above record exists in the same zone, you can expect the following:
+
+1. Cloudflare responds to DNS requests for `www.example.com` with `203.0.113.100`.
+2. Cloudflare proxies requests through the CDN and then routes the requests to the origin server `203.0.113.150`.
+3. As the HTTP response egresses the Cloudflare network back to the client side, the source IP address of the response becomes `203.0.113.100` (the IP address that the HTTP request originally landed on).
+
+</Details>
+
+:::note
+Having the same IP address as ingress IP (defined in the address map) and origin IP (listed in the DNS record) will not cause any loops.
+:::
+
+<Details header="Example">
+
+Assuming `203.0.113.100` was also the origin IP, the DNS record would look like the following:
+
+| Type | Name  | IP address      | Proxy status | TTL    |
+| ---- | ----- | --------------- | ------------ | ------ |
+| `A`  | `www` | `203.0.113.100` | `Proxied`    | `Auto` |
+
+</Details>
 
 ### Spectrum
 
