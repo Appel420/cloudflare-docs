@@ -65,7 +65,11 @@ method="GET"
 
 ### CDN
 
-If you already use BYOIP with CDN, you might be able to skip this step. If you are using this guide to upgrade a few IPs from a Spectrum prefix to the CDN, consider the following:
+If you already use BYOIP with CDN, you might be able to skip this step. However, if you are using this guide to upgrade a few IPs from a Spectrum prefix to the CDN, consider the following:
+
+:::note
+As described below, address maps and DNS records do not apply to Spectrum. To set up your Spectrum application with BYOIP, refer to the dedicated [Spectrum](#spectrum) section.
+:::
 
 #### Address maps
 
@@ -159,7 +163,35 @@ Assuming `203.0.113.100` was also the origin IP, the DNS record would look like 
 
 ### Spectrum
 
-Configure via API
+Configuring Spectrum to use your own IP address is only possible via the [Cloudflare API](/api/resources/spectrum/).
+
+The `origin_direct` field takes the origin IP address, while `edge_ips` allows you to define which IP address from your BYOIP prefix Cloudflare should use when responding to requests for your Spectrum application.
+
+<APIRequest
+path="/zones/{zone_id}/spectrum/apps"
+method="POST"
+json={[
+    {
+			"protocol":"tcp/22",
+			"dns":{
+				"type":"CNAME",
+				"name":"ssh.example.com"
+				},
+			"origin_direct":["tcp://192.0.2.1:22"],
+			"proxy_protocol":"off",
+			"ip_firewall":true,
+			"tls":"full",
+			"edge_ips":{
+				"type":"static",
+				"ips":["203.0.113.18"]
+				},
+			"traffic_type":"direct",
+			}
+  ]}
+	  code={{
+    mark: [17, 18, 19, 20, 21, "203.0.113.18"]
+  }}
+/>
 
 ---
 
