@@ -1,0 +1,19 @@
+---
+title: Searching for multiple names or contents
+description: Cloudflare is removing an undocumented method of searching for multiple DNS record names or contents.
+date: 2025-05-26T08:00:00Z
+---
+
+Cloudflare is removing the ability to search for multiple names or contents with a single API request.
+This behavior was never documented and conflicts with our public API reference.
+
+For example, the following queries will no longer work:
+
+```
+/dns_records?name=www,ftp
+/dns_records?content=127.0.0.1,127.0.0.2
+```
+
+More information and possible alternatives can be found in the [deprecation announcement](https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-02-21).
+
+This change may take up to 4 weeks to fully roll out.
