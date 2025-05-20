@@ -6,9 +6,9 @@ sidebar:
   label: CDN and Spectrum
 ---
 
-import { Render } from  "~/components";
+import { Render, APIRequest } from  "~/components";
 
- With [service bindings](/byoip/service-bindings/), CDN[^1] customers using BYOIP can use the same prefix they have onboarded to selectively route traffic on a per-IP address basis to [Spectrum](/spectrum/)[^2], and vice-versa. This means:
+ With [service bindings](/byoip/service-bindings/), CDN[^1] customers using BYOIP can take the same prefix they have onboarded to Cloudflare and use it to selectively route traffic on a per-IP address basis to [Spectrum](/spectrum/)[^2], or vice versa. This means:
 
 - You can upgrade individual IPs within a CDN prefix to a Spectrum IP. For example, if you have a CDN prefix 203.0.113.0/24, you can upgrade 203.0.113.1 to Spectrum.
 
@@ -52,9 +52,16 @@ params={{
 
 ### 3. Verify all service bindings
 
+After the propagation time (four to six hours), the [List Service Bindings](/api/resources/addressing/subresources/prefixes/subresources/service_bindings/methods/get/) endpoint should return all service bindings that are part of the prefix - in this case, CDN and Spectrum.
+
+<APIRequest
+path="/accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings"
+method="GET"
+/>
+
 ---
 
-## Prepare your Cloudflare services
+## Set up your Cloudflare services
 
 ### CDN
 
