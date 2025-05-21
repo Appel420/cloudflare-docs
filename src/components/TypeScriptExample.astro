@@ -13,10 +13,11 @@ const props = z
 		filename: z.string().optional(),
 		playground: z.boolean().default(false),
 		code: z.custom<ComponentProps<typeof Code>>().optional(),
+    omitTabs: z.boolean().optional(),
 	})
 	.strict();
 
-const { filename, playground, code } = props.parse(Astro.props);
+const { filename, playground, code, omitTabs } = props.parse(Astro.props);
 
 const slot = await Astro.slots.render("default");
 
@@ -41,19 +42,55 @@ if (!raw) {
 raw = raw.replace(/\u007f/g, "\n");
 
 const js = await format(tsBlankSpace(raw), { parser: "babel", useTabs: true });
----
 
-<Tabs syncKey="workersExamples">
-	<TabItem label="JavaScript" icon="seti:javascript">
-		<Code
-			{...code}
-			lang="js"
-			code={js}
-			title={filename?.replace(".ts", ".js")}
-			meta={playground ? "playground" : undefined}
-		/>
-	</TabItem>
-	<TabItem label="TypeScript" icon="seti:typescript">
-		<Code {...code} lang="ts" code={raw} title={filename} />
-	</TabItem>
-</Tabs>
+const includeTabsDefinition = !omitTabs;
+
+// Define tab config array
+const tabs = [
+  {
+    label: "JavaScript",
+    icon: "seti:javascript",
+    lang: "js",
+    code: js,
+    title: filename?.replace(".ts", ".js"),
+    meta: playground ? "playground" : undefined,
+  },
+  {
+    label: "TypeScript",
+    icon: "seti:typescript",
+    lang: "ts",
+    code: raw,
+    title: filename,
+    meta: undefined
+  },
+] as const;
+---
+{includeTabsDefinition ? (
+  <Tabs syncKey="workersExamples">
+    {tabs.map(tab => (
+      <TabItem label={tab.label} icon={tab.icon}>
+        <Code
+          {...code}
+          lang={tab.lang}
+          code={tab.code}
+          title={tab.title}
+          meta={tab.meta}
+        />
+      </TabItem>
+    ))}
+  </Tabs>
+) : (
+  <>
+    {tabs.map(tab => (
+      <TabItem label={tab.label} icon={tab.icon}>
+        <Code
+          {...code}
+          lang={tab.lang}
+          code={tab.code}
+          title={tab.title}
+          meta={tab.meta}
+        />
+      </TabItem>
+    ))}
+  </>
+)}
