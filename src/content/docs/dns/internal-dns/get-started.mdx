@@ -9,15 +9,12 @@ import { TabItem, Tabs, Details, Example, Render } from "~/components";
 
 Follow this guide to get started with Internal DNS.
 
-Although there are some steps that can be achieved on the dashboard, currently the whole process can only be completed via API.
-
 ## Before you begin
 
 <Render file="internal-dns-beta-note" />
 
 - Make sure you have an Enterprise account with access to [Gateway resolver policies](/cloudflare-one/policies/gateway/resolver-policies/) and [Internal DNS](/dns/internal-dns/).
 - Consider the different ways in which you can [connect to Gateway resolver](/dns/internal-dns/connectivity/).
-- If you are not familiar with how to use Cloudflare API, refer to [Fundamentals](/fundamentals/api/get-started/).
 - If you will be using an API token for authentication, make sure you have the following permissions:
 
 <Details header="API token configuration">
@@ -41,11 +38,25 @@ Although there are some steps that can be achieved on the dashboard, currently t
 
 ## 1. Set up your internal DNS zone
 
+<Tabs syncKey="dashPlusAPI"> <TabItem label="Dashboard">
+
+(Dash instructions)
+
+</TabItem> <TabItem label="API">
+
 <Render file="internal-zone-create" params={{
 	conditional: "get-started-detail"}}
 />
 
+</TabItem> </Tabs>
+
 ### (Optional) Reference a zone from another zone
+
+<Tabs syncKey="dashPlusAPI"> <TabItem label="Dashboard">
+
+(Dash instructions)
+
+</TabItem> <TabItem label="API">
 
 1. Use the [Update DNS settings](/api/resources/dns/subresources/settings/subresources/zone/methods/edit/) endpoint to add a reference from an internal zone to another internal zone. In `--data`, specify the `internal_dns` object with the parameter `reference_zone_id`. For details, refer to [reference zones](/dns/internal-dns/internal-zones/reference-zones/).
 
@@ -53,15 +64,26 @@ Although there are some steps that can be achieved on the dashboard, currently t
 <Render file="internal-reference-zone-api"/>
 </ Example>
 
+</TabItem> </Tabs>
+
 ## 2. Link your internal zone to a view
 
 Since the resolver policy will require a [DNS view](/dns/internal-dns/dns-views/), you must have at least one view to be able to route requests to internal zones.
+
+<Tabs syncKey="dashPlusAPI"> <TabItem label="Dashboard">
+
+(Dash instructions)
+
+</TabItem> <TabItem label="API">
 
 1. Use the [Create Internal DNS View](/api/resources/dns/subresources/settings/subresources/account/subresources/views/methods/create/) endpoint. For each view you create, list all the internal zones that should be grouped under that view.
 
 <Details header="DNS view configuration conditions">
 <Render file="internal-dns-view-conditions" />
 </Details>
+
+</TabItem> </Tabs>
+
 
 ## 3. Configure Gateway policies
 
