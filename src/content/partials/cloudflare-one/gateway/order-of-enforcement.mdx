@@ -6,10 +6,6 @@ import { Render } from "~/components";
 
 ```mermaid
 flowchart TB
-    %% Accessibility
-    accTitle: Gateway order of enforcement
-    accDescr: Flowchart describing the order of enforcement for Gateway policies.
-
  subgraph Resolution["Resolution"]
         dns2["1.1.1.1"]
         dns4["Custom resolver"]
@@ -31,7 +27,6 @@ flowchart TB
  subgraph Proxy["Proxy"]
         HTTP
         Network
-        Egress["Egress"]
   end
  subgraph Egress["Egress"]
         egress1["Egress policies <br>(Enterprise users only)"]
@@ -46,15 +41,15 @@ flowchart TB
     dns4 -.-> cloudflare["Private network services <br>(Cloudflare Tunnel, Magic WAN, etc.)"]
     http1 -. Inspect .-> http2
     http2 --> http3
-    network1 -.-> egress1
-    http0 --> n1["Magic Firewall"]
-    n1 --> n2["Check for origin availability (TCP SYN)"]
+    http0 --> magic["Magic Firewall"]
+    magic --> egress1
+    egress1 --> n2["Check for origin availability (TCP SYN)"]
     n2 --> network1
     http3 --> internet
     http1 -- Do Not Inspect --> internet
-    egress1 --> https
     https -- HTTPS --> http1
     https -. HTTP .-> http2
+    network1 --> https
 
     https@{ shape: hex}
     http0@{ shape: lean-r}
