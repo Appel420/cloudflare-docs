@@ -14,7 +14,7 @@ flowchart TB
         dns2["1.1.1.1"]
         dns4["Custom resolver"]
         dns3["Resolver policies <br>(Enterprise users only)"]
-        n4["Internal DNS"]
+        internal["Internal DNS"]
   end
  subgraph DNS["DNS"]
         dns1["DNS policies"]
@@ -29,7 +29,7 @@ flowchart TB
  subgraph Proxy["Proxy"]
         HTTP
         network1["Network policies"]
-        n5["Non-HTTP(S) traffic"]
+        nonhttp["Non-HTTP(S) traffic"]
   end
  subgraph Egress["Egress"]
         egress1["Egress policies <br>(Enterprise users only)"]
@@ -47,14 +47,14 @@ flowchart TB
     http2 --> http3
     http0 --> magic["Magic Firewall"]
     magic --> egress1
-    egress1 --> n2["Check for origin availability (TCP SYN)"]
-    n2 --> network1
+    egress1 --> tcp["Check for origin availability (TCP SYN)"]
+    tcp --> network1
     http3 --> internet
     https -- HTTPS --> http1
     https -- HTTP --> http2
-    network1 --> https & n5
-    dns3 --> n4 & dns2
-    n5 -----> internet
+    network1 --> https & nonhttp
+    dns3 --> internal & dns2
+    nonhttp -----> internet
 
     https@{ shape: hex}
     http0@{ shape: lean-r}
