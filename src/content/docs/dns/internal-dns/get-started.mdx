@@ -54,13 +54,20 @@ Follow this guide to get started with Internal DNS.
 
 ### (Optional) Reference a zone from another zone
 
+<Render file="internal-reference-zone-intro" params={{
+	conditional: "get-started-link"}}
+/>
+
 <Tabs syncKey="dashPlusAPI"> <TabItem label="Dashboard">
 
-(Dash instructions)
+1. Go to **Internal DNS** and select a zone.
+2. Within the selected zone, go to **Reference zone**.
+3. Select **Add reference zone**.
+4. Find the zone you want to use as reference and choose **Select** in the respective row.
 
 </TabItem> <TabItem label="API">
 
-1. Use the [Update DNS settings](/api/resources/dns/subresources/settings/subresources/zone/methods/edit/) endpoint to add a reference from an internal zone to another internal zone. In `--data`, specify the `internal_dns` object with the parameter `reference_zone_id`. For details, refer to [reference zones](/dns/internal-dns/internal-zones/reference-zones/).
+1. Use the [Update DNS settings](/api/resources/dns/subresources/settings/subresources/zone/methods/edit/) endpoint to add a reference from an internal zone to another internal zone. In `--json`, specify the `internal_dns` object with the parameter `reference_zone_id`.
 
 <Example>
 <Render file="internal-reference-zone-api"/>
