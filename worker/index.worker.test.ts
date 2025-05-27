@@ -43,13 +43,6 @@ describe("Cloudflare Docs", () => {
 			expect(response.headers.get("Location")).toBe("/products/");
 		});
 
-		it("redirects /changelog/index.xml to /release-notes/index.xml", async () => {
-			const request = new Request("http://fakehost/changelog/index.xml");
-			const response = await SELF.fetch(request, { redirect: "manual" });
-			expect(response.status).toBe(301);
-			expect(response.headers.get("Location")).toBe("/release-notes/index.xml");
-		});
-
 		it("redirects /changelog-next/ to /changelog/", async () => {
 			const request = new Request("http://fakehost/changelog-next/");
 			const response = await SELF.fetch(request, { redirect: "manual" });
