@@ -11,8 +11,8 @@ import { Render, Details } from "~/components";
 
 `cloudflared` can route to HTTP and non-HTTP applications on your private network using their private hostname (for example, `wiki.internal.local`). Private hostname routes are especially useful when the application has an unknown or ephemeral IP, which often occurs when infrastructure is provisioned by a third-party cloud provider.
 
-:::note[Availability]
-Hostname routes currently require Gateway resolver policies, an Enterprise-only feature. If you are on a Free or Pay-as-you-go plan, you will need to connect the application using its [IP address](/cloudflare-one/connections/connect-networks/private-net/cloudflared/connect-cidr/) and resolve its private hostname using [Local Domain Fallback](/cloudflare-one/connections/connect-networks/private-net/cloudflared/private-dns/).
+:::note[Only available on Enterprise plans]
+Hostname routes currently require Gateway resolver policies, an Enterprise-only feature. If you are on a Free or Pay-as-you-go plan, you will need to connect the application using [IP routes](/cloudflare-one/connections/connect-networks/private-net/cloudflared/connect-cidr/).
 :::
 
 ## How private hostname routing works
