@@ -1631,6 +1631,7 @@
 /workers/static-assets/compatibility-matrix/ /workers/static-assets/migration-guides/migrate-from-pages/ 301
 /workers/static-assets/migrations/vercel-to-workers/ /workers/static-assets/migration-guides/vercel-to-workers/ 301
 /workers/frameworks/framework-guides/remix/ /workers/frameworks/framework-guides/react-router/ 301
+/workers/frameworks/framework-guides/ /workers/frameworks/ 301
 /workers/frameworks/framework-guides/astro/ /workers/frameworks/web-apps/astro/ 301
 /workers/frameworks/framework-guides/nextjs/ /workers/frameworks/web-apps/nextjs/ 301
 /workers/frameworks/framework-guides/react-router/ /workers/frameworks/web-apps/react-router/ 301
