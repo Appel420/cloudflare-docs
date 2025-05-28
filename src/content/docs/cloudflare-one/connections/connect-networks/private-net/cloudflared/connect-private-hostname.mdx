@@ -94,22 +94,7 @@ Configure Gateway to resolve the private hostname using your internal DNS resolv
 
 ### 4. Set up the client
 
-<Details header="Feature availability">
-
-| [WARP modes](/cloudflare-one/connections/connect-devices/warp/configure-warp/warp-modes/) | [Zero Trust plans](https://www.cloudflare.com/teams-pricing/) |
-| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| Gateway with WARP                                                                         | Enterprise                                                    |
-
-| System   | Availability | Minimum WARP version |
-| -------- | ------------ | -------------------- |
-| Windows  | ✅           | 2025.4.929.0         |
-| macOS    | ✅           | 2025.4.929.0         |
-| Linux    | ✅           | 2025.4.929.0         |
-| iOS      | ❌           |                      |
-| Android  | ❌           |                      |
-| ChromeOS | ❌           |                      |
-
-</Details>
+<Render file="gateway/egress-selector-warp-version" />
 
 <Render file="tunnel/warp-to-tunnel-client" />
 
@@ -198,13 +183,7 @@ For a step-by-step troubleshooting procedure, refer to [Troubleshoot private net
 
 End users can connect to private hostnames from the following device on-ramps:
 
-| On-ramp method                                                                             | Compatibility |
-| ------------------------------------------------------------------------------------------ | ------------- |
-| [WARP client](/cloudflare-one/connections/connect-devices/warp/)                                  | ✅          |
-| [PAC files](/cloudflare-one/connections/connect-devices/agentless/pac-files/)              | ✅            |
-| [Browser Isolation](/cloudflare-one/policies/browser-isolation/)                           | ✅            |
-| [WARP Connector](/cloudflare-one/connections/connect-networks/private-net/warp-connector/) | ❌            |
-| [Magic WAN](/magic-wan/zero-trust/cloudflare-gateway/)                                     | ❌            |
+<Render file="gateway/egress-selector-onramps" />
 
 ### Private network connectivity
 
