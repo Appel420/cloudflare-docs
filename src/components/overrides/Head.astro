@@ -83,6 +83,16 @@ if (shouldNoIndex) {
 	});
 }
 
+if (frontmatter.chatbot_deprioritize) {
+	head.push({
+		tag: "meta",
+		attrs: {
+			name: "pcx_chatbot_deprioritize",
+			content: frontmatter.chatbot_deprioritize,
+		},
+	});
+}
+
 if (
 	frontmatter.description &&
 	head.findIndex(
