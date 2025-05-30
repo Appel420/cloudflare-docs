@@ -9,7 +9,7 @@ sidebar:
 
 import { Tabs, TabItem } from '~/components';
 
-User Groups are a collection of [account members](/fundamentals/setup/manage-members/manage/) that are treated equally from an access control perspective. User Groups can be assigned roles, with individual members in the group receiving all permissions of the roles assigned to the User Group.
+User Groups are a collection of [account members](/fundamentals/setup/manage-members/manage/) that are treated equally from an access control perspective. User Groups can be assigned permission policies, with individual members in the group receiving all permissions of the roles assigned to the User Group.
 
 :::note
 If you use the Cloudflare Dashboard SCIM integration, you can sync Groups from an upstream Identity Provider via SCIM. This allows you to centralize user and group management at your identity provider.
@@ -36,11 +36,11 @@ With your Group created, you can now add a [Permission Policy](/fundamentals/set
 
 1. In the **Groups** tab under **Permission policies**, select **Add a Policy**. 
 2. Specify the scope and permissions you want applied to the members of the group.
-3. Select **Create Policy** to apply it to the group. You return to the **Permission policies** for your Group.
+3. Select **Create Policy** to apply it to the group.
 
 </TabItem> <TabItem label="API">
 
-Using the role identifiers from the previous section, you can create a group policy.
+Using the role identifiers from the previous section, you can create a permission policy for your group.
 
 `export ADMIN_ROLE='...' # id field from admin or desired role entry from permission_groups API response`
 
