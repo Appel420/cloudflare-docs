@@ -10,7 +10,7 @@ head:
 
 import { Render } from "~/components";
 
-Cloudflare Zero Trust can integrate with SentinelOne to require that users connect to certain applications from managed devices. Our service-to-service posture check identifies devices based on their serial numbers. If multiple devices have the same serial number, we cannot accurately match a Cloudflare device with a third-party provider device. You must ensure that each of your devices has a unique serial number.
+<Render file="posture/service-provider-intro" params={{ one: "SentinelOne" }} />
 
 ## Prerequisites
 
