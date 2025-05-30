@@ -5,6 +5,10 @@ sidebar:
   label: Microsoft Entra
 ---
 
+import { Render } from "~/components";
+
+<Render file="idp-group-deprecation" />
+
 ## Set up the Enterprise application
 
 1. Go to your Microsoft Entra ID instance and select **Enterprise Applications**.
@@ -146,15 +150,3 @@ After completing the tasks above, the next steps in Entra include:
 - Additional group/provisioning configuration
 - Test and save after updating the config.
 - Provisioning after configuration is complete
-
-## Expected behaviors
-
-Expectations for user lifecycle management with SCIM:
-
-| Expected Cloudflare dash behavior              | Identity provider action      |
-| ---------------------------------------------- |-------------------------------|
-| User is added to account as member             | Assign the user to a SCIM application. They will be assigned the Minimal Account Access role so that their dash experience is not broken.   |
-| User is removed from account as member         | Unassign the user from the SCIM application.    |
-| Add role to user                               | Add the user to a group in the IdP which is pushed via SCIM. They must also be assigned to the SCIM application and exist as an account member.                 |
-| Remove role from user                          | Remove the user from the corresponding group in the IdP.   |
-| Retain user in account but with no permissions | Remove the user from all role groups but leave them assigned to the SCIM application. They will be an account member with only the role Minimal Account Access. |
